@@ -1,14 +1,13 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware({  
-  publicRoutes: ["/", "/api/webhooks/clerk", "/api/webhooks/stripe"]
-});
+export default clerkMiddleware(); // No `publicRoutes` directly here
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
+    "/",                     // Public route
+    "/api/webhooks/clerk",   // Public route
+    "/api/webhooks/stripe",  // Public route
+    "/(api|trpc)(.*)",       // All API and tRPC routes
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
   ],
 };
