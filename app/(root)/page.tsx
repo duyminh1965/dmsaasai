@@ -3,28 +3,11 @@ import { navLinks } from "@/constants"
 import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-const Home = ({ searchParams }: SearchParamProps) => {
- /*  const page = Number(searchParams?.page) || 1;  
+const Home = async ({ searchParams }: SearchParamProps) => {
+  const page = Number(searchParams?.page) || 1;  
   const searchQuery = (searchParams?.query as string) || '';  
-  const images = await getAllImages({ page, searchQuery }) */
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [images, setImages] = useState<any>(null);
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const page = Number(searchParams?.page) || 1;  
-      const searchQuery = (searchParams?.query as string) || '';  
-      const result = await getAllImages({ page, searchQuery });
-      setImages(result);
-      setPage(page);
-    };
-
-    fetchData();
-  }, [searchParams]);
+  const images = await getAllImages({ page, searchQuery })
 
   return (
     <>
