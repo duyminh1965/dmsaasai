@@ -4,19 +4,9 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
 
-declare type SearchParamProps1 = {
-  params: { id: string; type: TransformationTypeKey };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
 
-declare type TransformationTypeKey =
-    | "restore"
-    | "fill"
-    | "remove"
-    | "recolor"
-    | "removeBackground";
-
-const Home = async ({ searchParams }: SearchParamProps1) => {
+// const Home = async ({ searchParams }: SearchParamProps) => {
+const Home = async ({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) => {
   const page = Number(searchParams?.page) || 1;  
   const searchQuery = (searchParams?.query as string) || '';  
   const images = await getAllImages({ page, searchQuery })
