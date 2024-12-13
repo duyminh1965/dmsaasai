@@ -49,6 +49,8 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
 
+    if(isPending) console.log("pass");
+
     const initialValues = data && action === 'Update' ? {
         title: data?.title,
         aspectRatio: data?.aspectRatio,
