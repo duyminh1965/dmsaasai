@@ -54,12 +54,12 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-/* interface SearchParamProps {
+interface SearchParamProps {
   searchParams: {
     page?: string;
     query?: string;
   };
-} */
+}
 
 const Home: NextPage<SearchParamProps> = async ({ searchParams }) => {
   const page = Number(searchParams?.page) || 1;
