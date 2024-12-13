@@ -55,8 +55,8 @@ import Link from "next/link";
 
 interface SearchParamProps {
   searchParams: {
-    page?: string;
-    query?: string;
+    page: string;
+    query: string;
   };
 }
 
