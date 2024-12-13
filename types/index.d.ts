@@ -25,6 +25,7 @@ declare type CreateUserParams = {
       transformationType: string;
       width: number;
       height: number;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       config: any;
       secureURL: string;
       transformationURL: string;
@@ -44,6 +45,8 @@ declare type CreateUserParams = {
       transformationType: string;
       width: number;
       height: number;
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       config: any;
       secureURL: string;
       transformationURL: string;
@@ -128,6 +131,7 @@ declare type CreateUserParams = {
   };
   
   declare type TransformedImageProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     image: any;
     type: string;
     title: string;
