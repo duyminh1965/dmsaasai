@@ -50,7 +50,6 @@ export default Home
 import { Collection } from "@/components/shared/Collection";
 import { navLinks } from "@/constants";
 import { getAllImages } from "@/lib/actions/image.actions";
-import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
