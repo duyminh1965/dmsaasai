@@ -116,9 +116,9 @@ declare type CreateUserParams = {
     keysToRemove: string[];
   };
   
-  type SearchParamProps = {
-    params: { id: string; type: TransformationTypeKey };    
-    searchParams: Record<string, string | string[] | undefined>;
+  declare type SearchParamProps = {
+    params: { id: string; type: TransformationTypeKey };
+    searchParams: { [key: string]: string | string[] | undefined };
   };
   
   declare type TransformationFormProps = {
