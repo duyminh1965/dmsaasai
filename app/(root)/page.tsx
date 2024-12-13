@@ -61,7 +61,7 @@ interface SearchParamProps {
   };
 }
 
-const Home: NextPage<SearchParamProps> = async ({ searchParams }) => {
+const Home = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;
   const searchQuery = (searchParams?.query as string) || "";
 
