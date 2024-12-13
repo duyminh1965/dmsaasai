@@ -2,9 +2,21 @@ import { Collection } from "@/components/shared/Collection"
 import { navLinks } from "@/constants"
 import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
-import Link from "next/link"
+import Link from "next/link";
 
-const Home = async ({ searchParams }: SearchParamProps) => {
+declare type SearchParamProps1 = {
+  params: { id: string; type: TransformationTypeKey };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+declare type TransformationTypeKey =
+    | "restore"
+    | "fill"
+    | "remove"
+    | "recolor"
+    | "removeBackground";
+
+const Home = async ({ searchParams }: SearchParamProps1) => {
   const page = Number(searchParams?.page) || 1;  
   const searchQuery = (searchParams?.query as string) || '';  
   const images = await getAllImages({ page, searchQuery })
