@@ -4,10 +4,7 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
 
-const Home = async ({ searchParams }: {
-  params: { id: string; type: TransformationTypeKey };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const Home = async ({ searchParams }: {searchParams: { [key: string]: string | string[] | undefined }}) => {
   const page = Number(searchParams?.page) || 1;  
   const searchQuery = (searchParams?.query as string) || '';  
 
