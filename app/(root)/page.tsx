@@ -6,9 +6,12 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
 
-const Home = async ({ searchParams }: SearchParamProps) => {
-  const page = Number(searchParams?.page) || 1;  
-  const searchQuery = (searchParams?.query as string) || '';  
+//{ searchParams }: SearchParamProps
+const Home = async () => {
+  //const page = Number(searchParams?.page) || 1;  
+  //const searchQuery = (searchParams?.query as string) || '';  
+  const page = 1;  
+  const searchQuery = '';  
 
   const images = await getAllImages({ page, searchQuery });
 
