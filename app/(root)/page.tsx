@@ -6,12 +6,18 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
 
-//{ searchParams }: SearchParamProps
-const Home = async () => {
-  //const page = Number(searchParams?.page) || 1;  
-  //const searchQuery = (searchParams?.query as string) || '';  
-  const page = 1;  
-  const searchQuery = '';  
+type CustomPageProps = {
+  params: Promise<{ 
+    id: string; 
+    type: "restore" | "fill" | "remove" | "recolor" | "removeBackground"; 
+  }>;
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+const Home = async ({ searchParams }: CustomPageProps) => {
+  //const resolvedParams = await params; 
+  const page = Number(searchParams?.page) || 1;  
+  const searchQuery = (searchParams?.query as string) || '';   
 
   const images = await getAllImages({ page, searchQuery });
 
