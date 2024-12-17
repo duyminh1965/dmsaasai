@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 
 import { Collection } from "@/components/shared/Collection"
 import { navLinks } from "@/constants"
@@ -6,18 +5,10 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link";
 
-type CustomPageProps = {
-  params: Promise<{ 
-    id: string; 
-    type: "restore" | "fill" | "remove" | "recolor" | "removeBackground"; 
-  }>;
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-const Home = async ({ searchParams }: CustomPageProps) => {
+const Home = async ({ searchParams }: SearchParamProps) => {
   //const resolvedParams = await params; 
-  const page = Number(searchParams?.page) || 1;  
-  const searchQuery = (searchParams?.query as string) || '';   
+  const page = Number((await searchParams).page) || 1;  
+  const searchQuery = ((await searchParams).query as string) || '';   
 
   const images = await getAllImages({ page, searchQuery });
 
