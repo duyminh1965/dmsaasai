@@ -8,7 +8,8 @@ import { getUserImages } from "@/lib/actions/image.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 
 const Profile = async ({ searchParams }: SearchParamProps) => {
-  const page = Number(searchParams.page) || 1;
+  const page = Number((await searchParams).page) || 1; 
+  
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");
