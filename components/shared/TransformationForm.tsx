@@ -14,9 +14,7 @@ import {
   
 
 //import { Button } from "@/components/ui/button";
-import {
-  Form  
-} from "@/components/ui/form";
+import { Form  } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from "@/constants";
 import { CustomField } from "./CustomField";
@@ -65,120 +63,120 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
       })
      
       // 2. Define a submit handler.
-      async function onSubmit(values: z.infer<typeof formSchema>) {        
-        setIsSubmitting(true);
+    async function onSubmit(values: z.infer<typeof formSchema>) {        
+      setIsSubmitting(true);
 
-        if(data || image) {
-          const transformationUrl = getCldImageUrl({
-            width: image?.width,
-            height: image?.height,
-            src: image?.publicId,
-            ...transformationConfig
-          })
-
-          const imageData = {
-            title: values.title,
-            publicId: image?.publicId,
-            transformationType: type,
-            width: image?.width,
-            height: image?.height,
-            config: transformationConfig,
-            secureURL: image?.secureURL,
-            transformationURL: transformationUrl,
-            aspectRatio: values.aspectRatio,
-            prompt: values.prompt,
-            color: values.color,
-          }
-
-          if(action === 'Add') {
-            try {
-              const newImage = await addImage({
-                image: imageData,
-                userId,
-                path: '/'
-              })
-
-              if(newImage){
-                form.reset()
-                setImage(data)
-                router.push(`/transformations/${newImage._id}`)
-              }
-            } catch (error) {
-              console.log(error);
-            }            
-          }
-
-          if(action === 'Update'){
-            try {
-              const updatedImage = await updateImage({
-                image: {
-                  ...imageData,
-                  _id: data._id
-                },
-                userId,
-                path: `/transformations/${data._id}`
-              })
-
-              if(updatedImage){                
-                router.push(`/transformations/${updatedImage._id}`)
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          }          
-        }
-        setIsSubmitting(false)        
-      }
-      const onSelectFieldHandler = (value: string, onChangeField: (value: string) => void) => {
-        const imageSize = aspectRatioOptions[value as AspectRatioKey];
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        setImage((prevState: any) => ({
-          ...prevState,
-          aspectRatio: imageSize.aspectRatio,
-          width: imageSize.width,
-          height: imageSize.height,
-        }))
-
-        setNewTransformation(transformationType.config)
-
-        return onChangeField(value)
-      }
-
-      const onInputChangeHandler = (fieldName: string, value: string, type: string, onChangeField: (value: string) => void) => {
-        debounce(() => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          setNewTransformation((prevState: any) => ({
-            ...prevState,
-            [type]: {
-              ...prevState?.[type],
-              [fieldName === 'prompt' ? 'prompt' : 'to']:value
-            }
-          }))          
-        }, 1000)();
-
-        return onChangeField(value)
-      }
-
-      //TODO: return to updateCredits
-      const onTransformHandler = async () => {
-        setIsTransforming(true)
-
-        setTransformationConfig(
-          deepMergeObjects(newTransformation, transformationConfig)
-        )
-
-        setNewTransformation(null)
-
-        startTransition(async () => {
-          await updateCredits(userId, creditFee)
+      if(data || image) {
+        const transformationUrl = getCldImageUrl({
+          width: image?.width,
+          height: image?.height,
+          src: image?.publicId,
+          ...transformationConfig
         })
-      }
 
-      useEffect(() => {
-        if(image && (type === 'restore' || type === 'removeBackground')) {
-          setNewTransformation(transformationType.config)
+        const imageData = {
+          title: values.title,
+          publicId: image?.publicId,
+          transformationType: type,
+          width: image?.width,
+          height: image?.height,
+          config: transformationConfig,
+          secureURL: image?.secureURL,
+          transformationURL: transformationUrl,
+          aspectRatio: values.aspectRatio,
+          prompt: values.prompt,
+          color: values.color,
         }
-      }, [image, transformationType.config, type])
+
+        if(action === 'Add') {
+          try {
+            const newImage = await addImage({
+              image: imageData,
+              userId,
+              path: '/'
+            })
+
+            if(newImage){
+              form.reset()
+              setImage(data)
+              router.push(`/transformations/${newImage._id}`)
+            }
+          } catch (error) {
+            console.log(error);
+          }            
+        }
+
+        if(action === 'Update'){
+          try {
+            const updatedImage = await updateImage({
+              image: {
+                ...imageData,
+                _id: data._id
+              },
+              userId,
+              path: `/transformations/${data._id}`
+            })
+
+            if(updatedImage){                
+              router.push(`/transformations/${updatedImage._id}`)
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }          
+      }
+      setIsSubmitting(false)        
+    }
+    const onSelectFieldHandler = (value: string, onChangeField: (value: string) => void) => {
+      const imageSize = aspectRatioOptions[value as AspectRatioKey];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setImage((prevState: any) => ({
+        ...prevState,
+        aspectRatio: imageSize.aspectRatio,
+        width: imageSize.width,
+        height: imageSize.height,
+      }))
+
+      setNewTransformation(transformationType.config)
+
+      return onChangeField(value)
+    }
+
+    const onInputChangeHandler = (fieldName: string, value: string, type: string, onChangeField: (value: string) => void) => {
+      debounce(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setNewTransformation((prevState: any) => ({
+          ...prevState,
+          [type]: {
+            ...prevState?.[type],
+            [fieldName === 'prompt' ? 'prompt' : 'to']:value
+          }
+        }))          
+      }, 1000)();
+
+      return onChangeField(value)
+    }
+
+    //TODO: return to updateCredits
+    const onTransformHandler = async () => {
+      setIsTransforming(true)
+
+      setTransformationConfig(
+        deepMergeObjects(newTransformation, transformationConfig)
+      )
+
+      setNewTransformation(null)
+
+      startTransition(async () => {
+        await updateCredits(userId, creditFee)
+      })
+    }
+
+    useEffect(() => {
+      if(image && (type === 'restore' || type === 'removeBackground')) {
+        setNewTransformation(transformationType.config)
+      }
+    }, [image, transformationType.config, type])
     
   return (
     <Form {...form}>    
@@ -192,7 +190,6 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
             render={({ field }) => <Input {...field} 
             className="input-field" />}
         />
-clear
         {type === 'fill' && (
             <CustomField 
                 control={form.control}

@@ -3,6 +3,8 @@ import Sidebar from '@/components/shared/Sidebar'
 import { Toaster } from '@/components/ui/toaster'
 import React from 'react'
 
+//"Lume" — Short, simple, and evokes imagery of light, glow, and imagination. It suggests illumination, creativity, and vision, which align well with "simple image imagination."
+
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

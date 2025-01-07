@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer base { 
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -113,6 +113,9 @@
     @apply text-[36px] font-semibold sm:text-[44px] leading-[120%] sm:leading-[56px];
   }
 
+  .h2-semibold {
+    @apply text-[30px] font-sans sm:text-[36px] leading-[120%] sm:leading-[48px];
+  }
   /* 36 */
   .h2-bold {
     @apply text-[30px] font-bold md:text-[36px] leading-[110%];
@@ -225,6 +228,10 @@
 
   .home-heading {
     @apply h1-semibold max-w-[500px] flex-wrap text-center text-white shadow-sm;
+  }
+
+  .bar-heading {
+    @apply h2-semibold max-w-[500px] flex-wrap text-center text-blue-600 shadow-sm;
   }
 
   /* Credits Page */
