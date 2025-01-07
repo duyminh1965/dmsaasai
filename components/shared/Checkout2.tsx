@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+/* import { useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "../ui/button";
 
@@ -90,3 +90,4 @@ const PayPalCheckout = ({ amount }: { amount: number }) => {
 };
 
 export default PayPalCheckout;
+ */
