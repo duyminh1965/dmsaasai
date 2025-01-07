@@ -1,6 +1,7 @@
 
 import { type ClassValue, clsx } from "clsx";
 
+/* eslint-disable no-prototype-builtins */
 import qs from "qs";
 
 import { twMerge } from "tailwind-merge";
